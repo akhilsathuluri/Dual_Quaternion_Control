@@ -1,2 +1,2 @@
 # Dual_Quaternion_Control
-Dual Quaternion Control of PUMA 560
+Dual Quaternion Control of the six-axis PUMA 560 robot

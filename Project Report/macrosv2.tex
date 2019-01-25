@@ -1,0 +1,382 @@
+% This file contains a collection of useful macros commonly used by the kinematics and robotics community. 
+
+% Use the command "\input{macrosv1.tex}" to use them in a document. All the macros have been defined so that they can be called without using the math mode delimiter ($) and with xspace. 
+
+%This is version#2 of this document created on 12th September, 2018.
+%-----------------------------------------------------------------------------------------------------
+%-----------------------------------------------------------------------------------------------------
+
+%\usepackage{xspace}
+%\usepackage{amsmath,amssymb,amsfonts}
+
+%-----------------------------------------------------------------------------------------------------
+
+% Generic commands
+
+%% Definition of mathmode bold symbols
+\newcommand{\bs}[1]{\ensuremath{\boldsymbol{#1}}\xspace}
+\newcommand{\mt}[1]{\ensuremath{{#1}}\xspace}
+
+%-----------------------------------------------------------------------------------------------------
+
+% Vector symbols: lowercase English characters
+
+\newcommand{\ba}{\ensuremath{\bs a}\xspace}
+\newcommand{\bb}{\ensuremath{\bs b}\xspace}
+\newcommand{\bc}{\ensuremath{\bs c}\xspace}
+\newcommand{\bd}{\ensuremath{\bs d}\xspace}
+\newcommand{\be}{\ensuremath{\bs e}\xspace}
+\newcommand{\bsf}{\ensuremath{\bs f}\xspace}
+\newcommand{\bg}{\ensuremath{\bs g}\xspace}
+\newcommand{\bh}{\ensuremath{\bs h}\xspace}
+\newcommand{\bi}{\ensuremath{\bs i}\xspace}
+\newcommand{\bj}{\ensuremath{\bs j}\xspace}
+\newcommand{\bk}{\ensuremath{\bs k}\xspace}
+\newcommand{\bl}{\ensuremath{\bs l}\xspace}
+\newcommand{\bm}{\ensuremath{\bs m}\xspace}
+\newcommand{\bn}{\ensuremath{\bs n}\xspace}
+\newcommand{\bo}{\ensuremath{\bs o}\xspace}
+\newcommand{\bp}{\ensuremath{\bs p}\xspace}
+\newcommand{\bq}{\ensuremath{\bs q}\xspace}
+\newcommand{\br}{\ensuremath{\bs r}\xspace}
+\newcommand{\bfs}{\ensuremath{\bs s}\xspace}
+\newcommand{\bt}{\ensuremath{\bs t}\xspace}
+\newcommand{\bu}{\ensuremath{\bs u}\xspace}
+\newcommand{\bv}{\ensuremath{\bs v}\xspace}
+\newcommand{\bw}{\ensuremath{\bs w}\xspace}
+\newcommand{\bx}{\ensuremath{\bs x}\xspace}
+\newcommand{\by}{\ensuremath{\bs y}\xspace}
+\newcommand{\bz}{\ensuremath{\bs z}\xspace}
+
+% Matrix symbols: uppercase English characters
+
+\newcommand{\bA}{\ensuremath{\bs A}\xspace}
+\newcommand{\bB}{\ensuremath{\bs B}\xspace}
+\newcommand{\bC}{\ensuremath{\bs C}\xspace}
+\newcommand{\bD}{\ensuremath{\bs D}\xspace}
+\newcommand{\bE}{\ensuremath{\bs E}\xspace}
+\newcommand{\bF}{\ensuremath{\bs F}\xspace}
+\newcommand{\bG}{\ensuremath{\bs G}\xspace}
+\newcommand{\bH}{\ensuremath{\bs H}\xspace}
+\newcommand{\bI}{\ensuremath{\bs I}\xspace}
+\newcommand{\bJ}{\ensuremath{\bs J}\xspace}
+\newcommand{\bK}{\ensuremath{\bs K}\xspace}
+\newcommand{\bL}{\ensuremath{\bs L}\xspace}
+\newcommand{\bM}{\ensuremath{\bs M}\xspace}
+\newcommand{\bN}{\ensuremath{\bs N}\xspace}
+\newcommand{\bO}{\ensuremath{\bs O}\xspace}
+\newcommand{\bP}{\ensuremath{\bs P}\xspace}
+\newcommand{\bQ}{\ensuremath{\bs Q}\xspace}
+\newcommand{\bR}{\ensuremath{\bs R}\xspace}
+\newcommand{\bS}{\ensuremath{\bs S}\xspace}
+\newcommand{\bT}{\ensuremath{\bs T}\xspace}
+\newcommand{\bU}{\ensuremath{\bs U}\xspace}
+\newcommand{\bV}{\ensuremath{\bs V}\xspace}
+\newcommand{\bW}{\ensuremath{\bs W}\xspace}
+\newcommand{\bX}{\ensuremath{\bs X}\xspace}
+\newcommand{\bY}{\ensuremath{\bs Y}\xspace}
+\newcommand{\bZ}{\ensuremath{\bs Z}\xspace}
+
+% Greek letters
+
+%% Mathmode lowercase Greek symbols
+\newcommand{\alp}{\ensuremath{\alpha}\xspace}
+\newcommand{\bet}{\ensuremath{\beta}\xspace}
+\newcommand{\gm}{\ensuremath{\gamma}\xspace}
+\newcommand{\del}{\ensuremath{\delta}\xspace}
+\newcommand{\eps}{\ensuremath{\epsilon}\xspace}
+\newcommand{\zet}{\ensuremath{\zeta}\xspace}
+\newcommand{\et}{\ensuremath{\eta}\xspace}
+\newcommand{\tht}{\ensuremath{\theta}\xspace}
+\newcommand{\iot}{\ensuremath{\iota}\xspace}
+\newcommand{\kap}{\ensuremath{\kappa}\xspace}
+\newcommand{\lam}{\ensuremath{\lambda}\xspace}
+\newcommand{\mmu}{\ensuremath{\mu}\xspace}
+\newcommand{\mnu}{\ensuremath{\nu}\xspace}
+\newcommand{\mxi}{\ensuremath{\xi}\xspace}
+\newcommand{\mpi}{\ensuremath{\pi}\xspace}
+\newcommand{\mrho}{\ensuremath{\rho}\xspace}
+\newcommand{\sig}{\ensuremath{\sigma}\xspace}
+\newcommand{\mtau}{\ensuremath{\tau}\xspace}
+\newcommand{\ups}{\ensuremath{\upsilon}\xspace}
+\newcommand{\ph}{\ensuremath{\phi}\xspace}
+\newcommand{\mchi}{\ensuremath{\chi}\xspace}
+\newcommand{\mpsi}{\ensuremath{\psi}\xspace}
+\newcommand{\om}{\ensuremath{\omega}\xspace}
+\newcommand{\vth}{\ensuremath{\vartheta}\xspace}
+\newcommand{\vkap}{\ensuremath{\varkappa}\xspace}
+\newcommand{\vpi}{\ensuremath{\varpi}\xspace}
+\newcommand{\vrho}{\ensuremath{\varrho}\xspace}
+\newcommand{\vsig}{\ensuremath{\varsigma}\xspace}
+\newcommand{\vph}{\ensuremath{\varphi}\xspace}
+\newcommand{\veps}{\ensuremath{\varepsilon}\xspace}
+
+%% Mathmode bold lowercase Greek symbols 
+\newcommand{\balp}{\ensuremath{\bs \alpha}\xspace}
+\newcommand{\bbet}{\ensuremath{\bs \beta}\xspace}
+\newcommand{\bgamma}{\ensuremath{\bs \gamma}\xspace}
+\newcommand{\bdel}{\ensuremath{\bs \delta}\xspace}
+\newcommand{\beps}{\ensuremath{\bs \epsilon}\xspace}
+\newcommand{\bzet}{\ensuremath{\bs \zeta}\xspace}
+\newcommand{\bfeta}{\ensuremath{\bs \eta}\xspace}
+\newcommand{\bth}{\ensuremath{\bs \theta}\xspace}
+\newcommand{\biot}{\ensuremath{\bs \iota}\xspace}
+\newcommand{\bkap}{\ensuremath{\bs \kappa}\xspace}
+\newcommand{\blam}{\ensuremath{\bs \lambda}\xspace}
+\newcommand{\bmu}{\ensuremath{\bs \mu}\xspace}
+\newcommand{\bnu}{\ensuremath{\bs \nu}\xspace}
+\newcommand{\bxi}{\ensuremath{\bs \xi}\xspace}
+\newcommand{\bpi}{\ensuremath{\bs \pi}\xspace}
+\newcommand{\brho}{\ensuremath{\bs \rho}\xspace}
+\newcommand{\bsig}{\ensuremath{\bs \sigma}\xspace}
+\newcommand{\btau}{\ensuremath{\bs \tau}\xspace}
+\newcommand{\bups}{\ensuremath{\bs \upsilon}\xspace}
+\newcommand{\bphi}{\ensuremath{\bs \phi}\xspace}
+\newcommand{\bch}{\ensuremath{\bs \chi}\xspace}
+\newcommand{\bpsi}{\ensuremath{\bs \psi}\xspace}
+\newcommand{\bom}{\ensuremath{\bs \omega}\xspace}
+\newcommand{\bveps}{\ensuremath{\bs \varepsilon}\xspace}
+\newcommand{\nvph}{\ensuremath{\bs \varphi}\xspace}
+\newcommand{\bvsig}{\ensuremath{\bs \varsigma}\xspace}
+\newcommand{\bvrho}{\ensuremath{\bs \varrho}\xspace}
+\newcommand{\bvpi}{\ensuremath{\bs \varpi}\xspace}
+\newcommand{\bvkap}{\ensuremath{\bs \varkappa}\xspace}
+\newcommand{\bvth}{\ensuremath{\bs \vartheta}\xspace}
+
+%% Mathmode uppercase Greek symbols
+\newcommand{\Gm}{\ensuremath{\Gamma}\xspace}
+\newcommand{\Del}{\ensuremath{\Delta}\xspace}
+\newcommand{\Th}{\ensuremath{\Theta}\xspace}
+\newcommand{\Lam}{\ensuremath{\Lambda}\xspace}
+\newcommand{\mXi}{\ensuremath{\Xi}\xspace}
+\newcommand{\mPi}{\ensuremath{\Pi}\xspace}
+\newcommand{\Sig}{\ensuremath{\Sigma}\xspace}
+\newcommand{\Ups}{\ensuremath{\Upsilon}\xspace}
+\newcommand{\Ph}{\ensuremath{\Phi}\xspace}
+\newcommand{\Ps}{\ensuremath{\Psi}\xspace}
+\newcommand{\Om}{\ensuremath{\Omega}\xspace}
+
+%% Mathmode bold uppercase Greek symbols
+\newcommand{\bGm}{\ensuremath{\bs \Gamma}\xspace}
+\newcommand{\bDel}{\ensuremath{\bs \Delta}\xspace}
+\newcommand{\bTh}{\ensuremath{\bs \Theta}\xspace}
+\newcommand{\bLam}{\ensuremath{\bs \Lambda}\xspace}
+\newcommand{\bXi}{\ensuremath{\bs \Xi}\xspace}
+\newcommand{\bPi}{\ensuremath{\bs \Pi}\xspace}
+\newcommand{\bSig}{\ensuremath{\bs \Sigma}\xspace}
+\newcommand{\bUps}{\ensuremath{\bs \Upsilon}\xspace}
+\newcommand{\bPhi}{\ensuremath{\bs \Phi}\xspace}
+\newcommand{\bPsi}{\ensuremath{\bs \Psi}\xspace}
+\newcommand{\bOm}{\ensuremath{\bs{\Omega}}\xspace}
+
+% Vector/matrix "zero" and half
+\newcommand{\bzero}{\ensuremath{\bs{0}}\xspace}
+\newcommand{\half}{\ensuremath{\frac{1}{2}}\xspace}
+
+%-----------------------------------------------------------------------------------------------------
+
+%  Spaces symbols
+
+\newcommand{\C}{\ensuremath{\mathbb{C}}\xspace}
+\newcommand{\Cn}{\ensuremath{\mathbb{C}^n}\xspace}
+\newcommand{\D}{\ensuremath{\mathbb{D}}\xspace}
+\newcommand{\Dn}{\ensuremath{\mathbb{D}^n}\xspace}
+\renewcommand{\Re}{\ensuremath{\mathbb{R}}\xspace}
+\newcommand{\Rn}{\ensuremath{\mathbb{R}^n}\xspace}
+\newcommand{\Ri}[1]{\ensuremath{\mathbb{R}^{#1}}\xspace}
+\newcommand{\se}{\ensuremath{se(3)}\xspace}
+\newcommand{\ses}{\ensuremath{se^*(3)}\xspace}
+\newcommand{\SE}{\ensuremath{\mathbb{SE}(3)}\xspace}
+\newcommand{\so}{\ensuremath{so(3)}\xspace}
+\newcommand{\SO}{\ensuremath{\mathbb{SO}(3)}\xspace}
+\newcommand{\nul}[1]{\ensuremath{\mathcal{N}(#1)}\xspace}
+\newcommand{\row}[1]{\ensuremath{\mathcal{R}(#1)}\xspace}
+
+
+%% Notations for the configuration space
+\newcommand{\conf}{\ensuremath{\mathcal{C}}\xspace}
+\newcommand{\dimc}{\ensuremath{\textrm{dim}(\mathcal{C})}\xspace}
+
+%-----------------------------------------------------------------------------------------------------
+
+% Jacobian matrices
+
+%% Constraint Jacobian matrices
+\newcommand{\jetaq}{\ensuremath{{\boldsymbol J}_{\bfeta\bq}}\xspace}
+\newcommand{\jetath}{\ensuremath{{\bs J}_{\bfeta\bth}}\xspace}
+\newcommand{\jetaphi}{\ensuremath{{\bs J}_{\bfeta\bphi}}\xspace}
+\newcommand{\jetagamma}{\ensuremath{{\bs J}_{\bfeta\bgamma}}\xspace}
+\newcommand{\jetapsi}{\ensuremath{{\bs J}_{\bfeta\bpsi}}\xspace}
+\newcommand{\jphith}{\ensuremath{{\bs J}_{\bphi\bth}}\xspace}
+\newcommand{\jpsith}{\ensuremath{{\bs J}_{\bpsi\bth}}\xspace}
+\newcommand{\jgammath}{\ensuremath{{\bs J}_{\bgamma\bth}}\xspace}
+\newcommand{\Jfth}{\ensuremath{\boldsymbol{J}_{f\boldsymbol{\theta}}}\xspace}
+
+\newcommand{\jqth}{\ensuremath{{\boldsymbol{J}}_{\bq\bth}}\xspace}
+\newcommand{\jpq}{\ensuremath{{\boldsymbol{J}}_{\bp\bq}}\xspace}
+
+\newcommand{\jpcth}{\ensuremath{\boldsymbol{J}_{\pc\bth}\xspace}}
+\newcommand{\jpcphi}{\ensuremath{\boldsymbol{J}_{\pc\bphi}\xspace}}
+\newcommand{\jpcq}{\ensuremath{\boldsymbol{J}_{\pc\bq}\xspace}}
+
+\newcommand{\jfth}{\ensuremath{\boldsymbol{J}_{\bs{f}\bth}\xspace}}
+\newcommand{\jfpsi}{\ensuremath{\boldsymbol{J}_{\bs{f}\bpsi}\xspace}}
+\newcommand{\jfrts}{\ensuremath{\boldsymbol{J}_{\bs{f}\bs{r}_{ts}}\xspace}}
+\newcommand{\jfpc}{\ensuremath{\boldsymbol{J}_{\bs{f}\bp_c}\xspace}}
+
+\newcommand{\jpth}{\ensuremath{\boldsymbol{J}_{\boldsymbol{p\theta}}\xspace}}
+\newcommand{\jpphi}{\ensuremath{\boldsymbol{J}_{\boldsymbol{p\phi}}\xspace}}
+
+%% Angular velocity related
+\newcommand{\jom}{\ensuremath{{\bs J}_{\bom}}\xspace}
+\newcommand{\jomc}[1]{\ensuremath{{\boldsymbol J}_{\boldsymbol{\omega}_{c_#1}}}\xspace}
+\newcommand{\jomth}{\ensuremath{{\bs J}_{\bom\bth}}\xspace}
+\newcommand{\jomphi}{\ensuremath{{\bs J}_{\bom\bphi}}\xspace}
+\newcommand{\jomeq}{\ensuremath{{\bs J}_{\bom}^{eq}}\xspace}
+\newcommand{\jweq}{\ensuremath{{\bs J}_{\bs{w}}^{eq}}\xspace}
+
+%% Linear velocity related
+\newcommand{\jv}{\ensuremath{{\bs J}_{\bs v}}\xspace}
+\newcommand{\jvp}{\ensuremath{{\bs J}_{{\bs v}{\bs p}}}\xspace}
+\newcommand{\jvth}{\ensuremath{{\bs J}_{\bv\bth}}\xspace}
+\newcommand{\jvphi}{\ensuremath{{\bs J}_{\bv\bphi}}\xspace}
+\newcommand{\jveq}{\ensuremath{{\bs J}_{\bv}^{eq}}\xspace}
+\newcommand{\jc}{\ensuremath{{\bs J}_{\bs c}}\xspace}
+\newcommand{\jvpc}[1]{\ensuremath{\boldsymbol{J}_{{\bs v}{\bs p}_{c_#1}}}\xspace}
+\newcommand{\jcp}{\ensuremath{\bs{J}_{\bs{c}{\bp}}}\xspace}
+
+%-----------------------------------------------------------------------------------------------------
+
+% Kinematics
+
+%% Positions
+\newcommand{\rot}[2]{\ensuremath{{}^{#1}_{#2}{\boldsymbol{R}}}\xspace}
+\newcommand{\tran}[2]{\ensuremath{{}^{#1}_{#2}{\boldsymbol{T}}}\xspace}
+\newcommand{\frm}[1]{\ensuremath{\{#1\}}\xspace}
+\newcommand{\pc}{\ensuremath{\boldsymbol{p}_c}\xspace}
+\newcommand{\pci}[1]{\ensuremath{\bs{p}_{\boldsymbol{c}_{#1}}}\xspace}
+
+%% Velocities
+\newcommand{\vp}{\ensuremath{\bs{v}_{\boldsymbol{p}}}\xspace}
+\newcommand{\vpc}[1]{\ensuremath{\bs{v}_{\boldsymbol{p}_{c_#1}}}\xspace}
+
+%% Derivatives
+\newcommand{\xd}{\ensuremath{\dot{x}}\xspace}
+\newcommand{\xdd}{\ensuremath{\ddot{x}}\xspace}
+\newcommand{\bqd}{\ensuremath{\dot{\boldsymbol{q}}}\xspace}
+\newcommand{\bqdd}{\ensuremath{\ddot{\boldsymbol{q}}}\xspace}
+\newcommand{\pcd}{\ensuremath{\dot{\boldsymbol{p}_c}}\xspace}
+\newcommand{\thd}{\ensuremath{\dot{\theta}}\xspace}
+\newcommand{\bthd}{\ensuremath{\dot{\bs{\theta}}}\xspace}
+\newcommand{\bthdd}{\ensuremath{\ddot{\bth}}\xspace}
+\newcommand{\alphad}{\ensuremath{\dot \alpha}\xspace}
+\newcommand{\psid}{\ensuremath{\dot{\psi}}\xspace}
+\newcommand{\psidd}{\ensuremath{\ddot{\psi}}\xspace}
+\newcommand{\phid}{\ensuremath{\dot{\phi}}\xspace}
+\newcommand{\bPhid}{\ensuremath{\dot{\bs{\Phi}}}\xspace}
+\newcommand{\bphid}{\ensuremath{\dot{\bs{\phi}}}\xspace}
+\newcommand{\bpsid}{\ensuremath{\dot{\bs{\psi}}}\xspace}
+\newcommand{\bphidr}{\ensuremath{\dot{\boldsymbol{\phi}}^{\textrm{r}}}\xspace}
+\newcommand{\bphidn}{\ensuremath{\dot{\boldsymbol{\phi}}^{\textrm{n}}}\xspace}
+
+%-----------------------------------------------------------------------------------------------------.
+
+% Dynamics
+
+\newcommand{\bMth}{\ensuremath{\bs{M_\theta}}\xspace}
+\newcommand{\bCth}{\ensuremath{\bs{C_\theta}}\xspace}
+\newcommand{\bGth}{\ensuremath{\bs{G_\theta}}\xspace}
+
+\newcommand{\bin}{\ensuremath{\bs{I}_n}\xspace}
+\newcommand{\Ith}{\ensuremath{I(\theta)}\xspace}
+
+\newcommand{\bkp}{\ensuremath{\boldsymbol{K}_p}\xspace}
+\newcommand{\bkv}{\ensuremath{\boldsymbol{K}_v}\xspace}
+
+\newcommand{\bQc}{\ensuremath{\boldsymbol{Q}^{\textrm{c}}\xspace}}
+\newcommand{\Pnc}{\ensuremath{P^{\textrm{nc}}}\xspace}
+\newcommand{\bQnca}{\ensuremath{\boldsymbol{Q}^{\textrm{nc}}_{\textrm{a}}\xspace}}
+\newcommand{\bQnc}{\ensuremath{\boldsymbol{Q}^{\textrm{nc}}}\xspace}
+\newcommand{\bQncr}{\ensuremath{\boldsymbol{\mathcal{Q}}}\xspace}
+
+%-----------------------------------------------------------------------------------------------------.
+
+% Manipulators
+
+\newcommand{\rrs}{\ensuremath{3}-\underline{R}RS\xspace}
+\newcommand{\rps}{\ensuremath{3}-R\underline{P}S\xspace}
+\newcommand{\upu}{\ensuremath{3}-U\underline{P}U\xspace}
+\newcommand{\rrr}{\ensuremath{3}-\underline{R}RR\xspace}
+\newcommand{\rpr}{\ensuremath{3}-R\underline{P}R\xspace}
+\newcommand{\upsl}{\ensuremath{6}-U\underline{P}S\xspace}
+\newcommand{\map}{\mbox{MaPaMan}\xspace}
+\newcommand{\mapI}{\mbox{MaPaMan-I}\xspace}
+\newcommand{\mapII}{\mbox{MaPaMan-II}\xspace}
+
+%-----------------------------------------------------------------------------------------------------
+
+% Math Symbols
+
+\renewcommand{\iff}{\ensuremath{\mathit{iff}}\xspace}
+%\newcommand{\thm}{Theorem}[section]
+\newcommand{\imply}{\ensuremath{\Rightarrow \;}\xspace}
+\newcommand{\QED}{\ensuremath{\rule[0pt]{1.5ex}{1.5ex}}\xspace}
+%\newcommand{\proof}{\noindent\hspace{2em}{\em Proof: }\xspace}
+%\newcommand{\endproof}{\hspace*{\fill}~\QED\par\endtrivlist\unskip}
+%\newcommand{\mathe}{\verb|Mathematica| \xspace}
+\newcommand{\define}{\ensuremath{\stackrel{\Delta}{=}}\xspace}
+\newcommand{\elim}[1]{\ensuremath{\stackrel{\times #1}{\longrightarrow}}\xspace}
+
+%% Operations
+\newcommand{\adj}{\text{adj}\xspace}
+\newcommand{\trace}{\text{tr}\xspace}
+
+%%% Norm
+\newcommand{\norm}[1]{\ensuremath{\| #1\|}\xspace}
+\newcommand{\normd}[1]{\ensuremath{\| #1\|_d}\xspace}
+
+%%% Partial derivative
+\newcommand{\pd}[2]{\ensuremath{\frac{\partial #1}{\partial #2}}\xspace}
+\newcommand{\dpd}[2]{\ensuremath{\dfrac{\partial #1}{\partial #2}}\xspace}
+
+%%% Total derivative
+\newcommand{\td}[2]{\ensuremath{\frac{\textrm{d} #1}{\textrm{d} #2\hfill}}\xspace}
+\newcommand{\dtotder}[2]{\ensuremath{\dfrac{\textrm{d} #1}{\textrm{d} #2\hfill}}\xspace}
+
+%%% Partial second derivative
+\newcommand{\pdd}[2]{\ensuremath{\frac{\partial^2 #1}{\partial #2^2}}\xspace}
+
+%%% Total second derivative
+\newcommand{\tdd}[2]{\ensuremath{\frac{\textrm{d}^2 #1}{\textrm{d} #2^2\hfill}}\xspace}
+\newcommand{\dsecder}[2]{\ensuremath{\dfrac{\textrm{d}^2 #1}{\textrm{d} #2^2\hfill}}\xspace}
+
+%%% Scalar tripple product
+\newcommand{\trip}[3]{\ensuremath{\left[#1, #2, #3\right]\xspace}}
+
+%% Rank symbol
+\newcommand{\rank}[1]{\ensuremath{\mathrm{rank}\left(#1\right)}\xspace}
+
+%-----------------------------------------------------------------------------------------------------
+
+% Generic words
+
+\newcommand{\dof}{degree-of-freedom\xspace}
+\newcommand{\dofs}{degrees-of-freedom\xspace}
+\newcommand{\rb}{rigid-body\xspace}
+\newcommand{\rbm}{rigid-body motion\xspace}
+\newcommand{\asf}{actuator-space formulation\xspace}
+\newcommand{\csf}{configuration-space formulation\xspace}
+
+%-----------------------------------------------------------------------------------------------------
+
+\newcommand{\ith}{\ensuremath{i}th\xspace}
+
+%-----------------------------------------------------------------------------------------------------
+
+% References
+
+\newcommand{\mref}[1]{\ref{#1}\xspace}
+\newcommand{\mcite}[1]{\cite{#1}\xspace}
+\newcommand{\mlabel}[1]{\label{#1}\xspace}
+
+% Quaternions

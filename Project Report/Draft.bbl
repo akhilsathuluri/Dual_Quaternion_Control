@@ -1,0 +1,49 @@
+\begin{thebibliography}{1}
+
+\bibitem{ken2012beginners}
+B.~Kenwright, ``A beginners guide to dual-quaternions: What they are, how they
+  work, and how to use them for 3d character hierarchies,'' {\em The 20th
+  International Conference on Computer Graphics, Visualization and Computer
+  Vision}, pp.~1--13, June 2012.
+
+\bibitem{akyar2008dual}
+B.~Akyar, ``Dual quaternions in spatial kinematics in an algebraic sense,''
+  {\em Turkish Journal of Mathematics}, vol.~32, no.~4, pp.~373--391, 2008.
+
+\bibitem{pham2010position}
+H.-L. Pham, V.~Perdereau, B.~V. Adorno, and P.~Fraisse, ``Position and
+  orientation control of robot manipulators using dual quaternion feedback,''
+  in {\em Intelligent Robots and Systems (IROS), 2010 IEEE/RSJ International
+  Conference on}, pp.~658--663, IEEE, 2010.
+
+\bibitem{ghosal2006robotics}
+A.~Ghosal, {\em Robotics: fundamental concepts and analysis}.
+\newblock Oxford university press, 2006.
+
+\bibitem{adorno2010dual}
+B.~V. Adorno, P.~Fraisse, and S.~Druon, ``Dual position control strategies
+  using the cooperative dual task-space framework,'' in {\em IROS'10:
+  International Conference on Intelligent Robots and Systems}, pp.~3955--3960,
+  IEEE, 2010.
+
+\bibitem{park1995distance}
+F.~C. Park, ``Distance metrics on the rigid-body motions with applications to
+  mechanism design,'' {\em Journal of Mechanical Design}, vol.~117, no.~1,
+  pp.~48--54, 1995.
+
+\bibitem{figueredo2013robust}
+L.~Figueredo, B.~V. Adorno, J.~Y. Ishihara, and G.~A. Borges, ``Robust
+  kinematic control of manipulator robots using dual quaternion
+  representation,'' in {\em Robotics and Automation (ICRA), 2013 IEEE
+  International Conference on}, pp.~1949--1955, IEEE, 2013.
+
+\bibitem{bullo1995proportional}
+F.~Bullo and R.~M. Murray, ``Proportional derivative (pd) control on the
+  euclidean group,'' in {\em European Control Conference}, vol.~2,
+  pp.~1091--1097, 1995.
+
+\bibitem{bottema1979theoretical}
+O.~Bottema and B.~Roth, ``Theoretical kinematics,'' {\em NORTH-HOLLAND PUBL.
+  CO., N. Y., 1979, 558}, 1979.
+
+\end{thebibliography}

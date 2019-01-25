@@ -1,0 +1,394 @@
+%%%%%%%%%%%%%%%%%%%%%%
+\nonstopmode
+%%
+\documentclass[a4paper,12pt]{article}
+%%
+% Importing the required packages 
+\usepackage{verbatim}       % for including codes and also for better usage of comments
+\usepackage{graphicx,subfigure,epsfig,float}
+\usepackage{xspace}
+\usepackage{array,multirow}
+\usepackage{amsmath,amssymb,amstext,amsxtra,amsbsy,amsgen}
+\usepackage{hyperref}
+\usepackage{caption}
+%%
+% Sizes and margins
+\setlength{\textheight}{10.5 in}
+\setlength{\textwidth}{7 in}
+\setlength{\oddsidemargin}{-0.25 in} 
+\setlength{\evensidemargin}{0.00 in}
+\setlength{\topmargin}{-1 in}
+\topmargin=-1in
+%%
+\def\baselinestretch{1.5}
+%%
+% Macros for the ease of writing the report.
+\input{macrosv2}
+%%
+%New commands
+\newcommand{\Hp}{\ensuremath{\stackrel{+}{H}}\xspace}
+\newcommand{\Hn}{\ensuremath{\stackrel{-}{H}}\xspace}
+% Path for graphics
+\graphicspath{{assets/}}
+%%
+\date{}
+\title{Dual Quaternion Based Control}
+%\\ED6006: Advanced Topics in the Mechanics of Robots
+\author{Akhil Sathuluri}
+%ED14B037
+%%%%%%%%%%%%%%%%%%%%%
+%%
+\begin{document}
+%
+\maketitle % Do not remove this!
+%%
+\section{Introduction}
+
+\subsection{Why use quaternions?}
+The rotation matrices have inherent problems. The following are a few issues using the conventional methods of representation of a rigid body:
+\begin{enumerate}
+	\item Well known reason of representation singularities using Euler Angles (Gimbal Lock).
+	\item The rotational part of the transformation matrix is orthogonal, but they drift and cause unwanted scaling and shearing the object of interest in a computer graphics scenario\cite{ken2012beginners}. Re-normalisation of these matrices is not a simple task. 
+	\item Quaternions are useful for another reason that they preserve the algebraic nature of the equations derived from them. They do not produce a complicated set of equations in sines and cosines.
+	\item Interpolation of matrices is not straightforward.
+\end{enumerate}
+
+\subsubsection{Quaternions}
+A short description of quaternions is given below.\\
+Quaternion, introduced by Hamilton are four-dimensional extensions to the complex numbers we know. It is represented as,
+\begin{align}
+	\bq = a_0 + a_1 i+ a_2 j+a_3 k \label{eq1}
+\end{align}
+where $a_0, a_1, a_2, a_3 \in \Re$ and i, j, k are the imaginary components and are defined as, 
+\begin{align}
+	i^2=j^2=k^2=-1 \\
+	ij=k, jk=i, ki=j, ji=-k, kj=-i, ik=-j
+\end{align}
+Another common representation of quaternions is as a scalar and a vector pair as shown,
+\begin{align}
+	\bq = (s, \vec{v})
+\end{align} 
+The addition of two quaternions follows the normal element wise operation, where as multiplication is as follows, 
+\begin{align}
+	\bq_1\bq_2 = (s_1 s_2-\vec{v_1}\vec{v_2}, s_1\vec{v_2}+s_2\vec{v_1}+\vec{v_1}\times\vec{v_2})
+\end{align}
+The conjugate of a quaternion and the norm are as defined, 
+\begin{align}
+	\bq^* = (s, -\vec{v}) \\
+	\norm{\bq} = \bq\bq^*
+\end{align}
+Unit quaternions, i.e. $\norm{\bq}=1$ can be used to represent rotations. Given rotation of a rigid body by an angle \bth about an axis $\vec{k}$ it can be represented as, 
+\begin{align}
+	\bq = (cos(\frac{\bth}{2}), \vec{k}sin(\frac{\bth}{2}))
+\end{align}
+
+Other useful properties of quaternions are the Hamiltonian operators. For a given quaternion represented as (\ref{eq1}), the Hamiltonian operators are as given \cite{akyar2008dual},
+\begin{align}
+	\Hp(\bq) = \begin{pmatrix}
+	a_0 & -a_1 & -a_2 & -a_3\\
+	a_1 &  a_0 & -a_3 &  a_2\\
+	a_2 &  a_3 &  a_0 & -a_1\\
+	a_3 & -a_2 &  a_1 &  a_0\\	
+	\end{pmatrix}
+	\\
+	\Hn(\bq) = \begin{pmatrix}
+	a_0 & -a_1 & -a_2 & -a_3\\
+	a_1 &  a_0 &  a_3 & -a_2\\
+	a_2 & -a_3 &  a_0 &  a_1\\
+	a_3 &  a_2 & -a_1 &  a_0\\	
+	\end{pmatrix}
+\end{align}
+
+These operators allow us to manipulate the quaternion multiplication as though they are commutative.
+\begin{align}
+	\bq_1\bq_2 = \Hp(\bq_1) \bq_2 = \Hn(\bq_2) \bq_1 \label{hamilt}
+\end{align}
+
+\subsection{Why use dual numbers?}
+The reasons for using dual numbers for representation in robot kinematics are, 
+\begin{enumerate}
+	\item Allows us to do line transformations.
+	\item Gives a compact representation of both translation and rotation components, and their velocities, which are represented by a line in the 3D space.
+\end{enumerate}
+\subsubsection{Dual Numbers}
+Given the distance between two lines in 3D as, d and the angle their directions is $\alpha$, 
+\begin{align}
+	\hat{\alpha} = \alpha + \eps d
+\end{align}
+where $\eps^2$ is defined to be 0
+
+\subsection{Why use dual quaternions?}
+This is a generalisation of a quaternion into a dual number. They carry the advantages of both using quaternions and dual numbers. \\
+Unit dual quaternions can be used to represent general affine transformations. and are denoted as below,
+\begin{align}
+	\hat{\bq} = \bq+\frac{\eps}{2}\bt \bq
+\end{align}
+where \bq represents the quaternion corresponding to the rotation, \bt represents the quaternion representing translation i.e., (0, $\vec{t}$), where $\vec{t}$ represents the translation vector and $\hat{\bq}$ represents the configuration of a rigid body translated by \bt and then rotated by \bq.
+
+\section{Dual Quaternion Control}
+The following method of formulating control law using dual quaternions is as given in \cite{pham2010position}
+\subsection{Forward Kinematics}
+The robot used in the current study is the six-axis, PUMA 560 robot. The forward kinematic map in terms of the end-effector dual quaternion is obtained based on the DH parameters given in \cite{ghosal2006robotics}
+\begin{align}
+	\hat{\bq}_{ee} = \hat{\bq}_1\hat{\bq}_2\hat{\bq}_3...\hat{\bq}_n
+\end{align}
+where, $\hat{\bq}_1$ represents the configuration of the end-effector and the other represent the individual quaternions corresponding to the DH parameters. 
+\subsection{Formulating Jacobian}
+From here we assume the dual quaternions are mapped to the $\Re^8$. So we differentiate the eight dimensional tuple with respect to the actuated variables, i.e. $\bth_1$, $\bth_2$, $\bth_3$, $\bth_4$, $\bth_5$, $\bth_6$. This gives us a Jacobian of size $8\times6$ which we shall call $J_{dual}$. This gives us,
+\begin{align}
+	\dot{\hat{\bq}} = J_{dual} \dot{\vec{\bth}} \label{eqJ}
+\end{align}
+\subsection{Control Law} \label{controllaw}
+Here we only deal with a regulation problem using Jacobian based control. A regulation problem is nothing but a position control problem, i.e. given a position or a final configuration, we control the robot to reach that final position. In this case, this is done based on the Jacobian, i.e. the problem is simplified by considering only the kinematics, ignoring the dynamic effects of the robot.
+\subsubsection{Error Dynamics}
+Let the initial configuration of the end-effector be $\hat{\bq}_1$ and the desired configuration to be $\hat{\bq}_d$. Let us define the error to be,
+\begin{align}
+	\hat{\bq}_e = \hat{\bq}_d - \hat{\bq} \label{eqe}
+\end{align}
+where $\hat{\bq}_e$ represents the error dual quaternion and $\hat{\bq}$ represents the configuration at any given instant.\\
+Differentiating equation (\ref{eqe}), gives the following,
+\begin{align}
+	\dot{\hat{\bq}}_e = \dot{\hat{\bq}}_d - \dot{\hat{\bq}}
+\end{align}
+Since, we are dealing with a regulation problem, we have a fixed $\dot{\hat{\bq}}_d$ and hence its derivative is zero.
+\begin{align}
+	\dot{\hat{\bq}}_e = - \dot{\hat{\bq}} \label{eqde}
+\end{align}
+Substituting (\ref{eqJ}) equation in (\ref{eqde}) gives,
+\begin{align}
+	\dot{\hat{\bq}}_e = - J_{dual} \dot{\vec{\bth}}
+\end{align}
+Let us consider a proportional control of this system and propose the control law to be,
+\begin{align}
+	\dot{\vec{\bth}} = J_{dual}^T K \hat{\bq}_e \label{thdyn}
+\end{align}
+This choice is to ensure asymptotic stability of the system making $J_{dual} J_{dual}^T$ a positive definite matrix\cite{pham2010position}.\\ This gives the error dynamics to be,
+\begin{align}
+	\dot{\hat{\bq}}_e+J_{dual} J_{dual}^T K \hat{\bq}_e \label{errordyn} = 0 
+\end{align}
+Integrating the equations (\ref{errordyn}) and (\ref{thdyn}) together gives us the motion of the end-effector.\\
+\section{Discussion}
+The gain parameter K = 185 is tuned to for the performance parameters of settling time of 10 seconds.\\
+The asymptotic convergence of the error is as shown,
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.8]{dqc_error}
+	\caption{Asymptotic convergence of the quaternion error}
+	\label{fg:dqc_error}
+\end{figure}
+The corresponding plot of the angles reaching the final position is as shown.
+\begin{figure}[h]
+	\centering
+	\includegraphics[scale=0.8]{dqc_angles}
+	\caption{The trajectory of the six angles of PUMA 560 robot}
+	\label{fg:dqc_angles}
+\end{figure}
+With an increase in the gain as expected the manipulator tries to minimise the error more aggressively.
+\section{Utility}
+One of the applications for such dual quaternion based control could be in cooperative task space, where two robot arms need to move together to perform a task \cite{adorno2010dual}.\\
+When two robots or a single robot with two hands do a task, using dual quaternions to represent the task would greatly simplify the task definition. The paper has suggested the use of various primitives for control. These primitives used in any sequence would give meaningful control to complete the task.\\
+One of such primitive is the task definition of relative Cartesian position control which is demonstrated here. Consider the relative quaternion of the end effector to be,
+\begin{align}
+	\hat{\bq}_r = \hat{\bq}^{*}_{2}\hat{\bq}_{1}\\
+	\hat{\bq}_r = \bq_r + \bq^{'}_r\\
+	\bq^{'}_r = \frac{\eps}{2}\bt_r \bq_r
+\end{align}
+Now form this the translation quaternion can be extracted out as, 
+\begin{align}
+	\bt_r = 2\bq^{'}_r\bq^{*}_r
+\end{align}
+Again consider the quaternion to be $\bt_r$ to be an element in $\Re^{8}$. Differentiating this equation gives and using (\ref{hamilt}),
+\begin{align}
+	\dot{\bt_r} = 2\dot{\bq^{'}}_r\bq^{*}_r+2\bq^{'}_r\dot{\bq^{*}_r}\\
+	\dot{\bt_r} = 2(\Hn(\bq^{*}_r)J_{\bq^{'}_r}+\Hp(\bq^{'})J_{\bq^{*}_r})\dot{\vec{\bth}}
+\end{align}
+where $\dot{\vec{\bth}}$ here represents a 12 dimensional vector. So controlling the relative translation quaternion which is 4 dimensional gives us the definition of control for all the joint angles. \\
+The similar strategy was used in \cite{adorno2010dual} with four different primitives to perform simple tasks like grasping a balloon and pouring water in a cup from a bottle with a two armed robot.
+Using this new definition of Jacobian for the given task, we implement the control strategy as mentioned in section (\ref{controllaw}).
+The following is the asymptotic error convergence plot and the corresponding change in the angles of both the manipulators.
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.8]{dqc_ctc_error}
+	\caption{Asymptotic convergence of the error for relative Cartesian control}
+\end{figure}
+
+\section{Error in error}
+Based on the (brief) literature survey of usage of dual quaternions done, it is observed that in practical purposes it is comfortable to implement control assuming that these dual quaternions are embedded in $\Re^8$ as in \cite{pham2010position} and \cite{adorno2010dual} to mention a few. But we know that these entities represent elements from \SE, and hence the difference between the two values does not yield a distance measure. It would no longer represent a physically realisable robot configuration as the error is no longer a unit dual quaternion.
+
+\subsection{What do we do?}
+For the next part of the work, we follow the path of \cite{bullo1995proportional}, which extends the classical PD controllers to \SO and \SE.\\
+Following the formulation in \cite{bullo1995proportional}, we choose to use the logarithmic feedback controller. The setting given in the paper is generic to any system in \SE and an example in $\ensuremath{\mathbb{SE}(2)}\xspace$ of a differential mobile robot is given. In the current work, we extend this formulation to dual quaternions and show its utility in control of a six-axis serial robot.
+
+\section{Error Dynamics}
+Knowing the fact that dual quaternions represent elements in \SE, a more reasonable choice of error would be, 
+\begin{align}
+	\hat{\bq}_e = \hat{{\bq^*}_d} \hat{\bq}
+\end{align}
+Differentiating the above term and setting $\dot{\hat{\bq}}^*_d$ to zero(regulation problem), we get,
+\begin{align}
+	\dot{\hat{\bq}}_e = \hat{{\bq^*}_d} \dot{\hat{\bq}}
+\end{align}
+The logarithmic error feedback in our case would be of the form,
+\begin{align}
+	\dot{\hat{\bq}} = -K \log(\hat{\bq}_e)
+\end{align}
+where K is a matrix positive definite matrix. Unlike the previous case, in this case, we can tune the gains for linear and angular velocities separately by internally having different coefficients in the matrix.\\
+There are some interesting properties of a dual quaternion. Similar to any complex number which can be represented using the Euler's form, dual quaternions can be represented in a similar way \cite{bottema1979theoretical}.
+\begin{align}
+	\hat{\bq} = \bq \exp(\eps \frac{\vec{t}}{2})
+\end{align}
+So applying a logarithm would give us the following, 
+\begin{align}
+	\log(\hat{\bq}) = \frac{\bth \vec{k}}{2} + \eps \frac{\vec{t}}{2}
+\end{align}
+Using the above equations, we reformulate the error dynamics in terms of the elements in \se and implement control over these elements.\\
+{\bf Note:} Please understand that,
+\begin{align}
+	\log(\hat{\bq}) = \log(\hat{\bq_1}\hat{\bq_2})
+\end{align}
+satisfies but, 
+\begin{align}
+	\log(\hat{\bq}) \neq \log(\hat{\bq_1})+\log(\hat{\bq_2})\\
+	\log(\hat{\bq})-\log(\hat{\bq_1}) \neq \log(\hat{\bq_2})
+\end{align}
+This is from the fact that dual quaternions multiplication is not same as multiplication in $\Re^n$\\
+Instead we have, 
+\begin{align}
+	\log(\hat{\bq^*_1} \hat{\bq}) = \log(\hat{\bq_2})
+\end{align}
+\section{Discussion}
+The error in the controlled entities i.e., the error in end effector orientation and the position asymptotically go to zero.
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.7]{dqc_log_error}
+	\caption{Asymptotic convergence of the error for logarithmic feedback}
+	\label{fg:dqc_log_error}
+\end{figure}
+The proportional gain of both the linear and angular velocity components was kept equal to 1 for the above plot.\\
+A quick observation is that the variables that converge quickly are the ones corresponding to the errors in the translation of the end-effector. It is also to be noted that the control scheme for position is dependent on the angle at every instant.
+
+\section{Comparison of the two controllers}
+Both the controllers were given the same desired, and final quaternion configurations and the resulting control laws are observed. A same gain value is given to both the controllers. We shall call the logarithmic controller as logc and difference controller as diffc from now on.
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.7]{dqc_comparison_path}
+	\caption{Path traced by the logarithmic controller (red) and the difference controller(blue)}
+	\label{fg:dqc_comparison}
+\end{figure}
+where the three axes represent $\Re^3$.\\
+Note that diffc travels extra distance than the logc. Also that the initial motion of the manipulatior is quite rapid as the dots are farther from each other as compared to the red dots. Investigating the path followed by diffc alone would be as shown below. 
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.8]{dqc_diffc_path}
+	\caption{Curved path traced by diffc}
+	\label{fg:dqc_diffc_path}
+\end{figure}
+The \SE visualisation of the diffc controller is,
+\begin{figure}[H]
+	\centering
+	\begin{subfigure}
+		\centering
+		\includegraphics[scale=0.5]{diffc}
+		\label{fg:diff_se}
+	\end{subfigure}
+	\begin{subfigure}
+		\centering
+		\includegraphics[scale=0.5]{diffc_2}
+		\label{fg:diff_se_2}
+	\end{subfigure}
+	\caption{The \SE visualisation of diffc in two viewing angles}
+\end{figure}
+The box represents the $\Re^3$. The tri-colour axes represent the \SO part and the black dots represent the $\Re^3$ part of the motion of the manipulator end-effector.
+
+It can be seen that the end-effector does not reach its final configuration in the given time. So increasing the gain to 185 which matches the settling time with logc is as shown, 
+
+\begin{figure}[H]
+	\centering
+	\begin{subfigure}
+		\centering
+		\includegraphics[scale=0.5]{diffc_185}
+		\label{fg:logc_se_185}
+	\end{subfigure}
+	\begin{subfigure}
+		\centering
+		\includegraphics[scale=0.5]{diffc_185_2}
+		\label{fg:logc_se_2_185}
+	\end{subfigure}
+	\caption{The \SE visualisation of logc in two viewing angles for the controller gain of $Kp=185$}
+\end{figure}
+
+The initial part of the trajectory is missing in the above plot as the controller was too aggressive in the initial part and the motion took place in a very small time.
+
+The \SE visualisation of the logc controller is,
+\begin{figure}[H]
+	\centering
+	\begin{subfigure}
+		\centering
+		\includegraphics[scale=0.5]{logc}
+		\label{fg:logc_se}
+	\end{subfigure}
+	\begin{subfigure}
+		\centering
+		\includegraphics[scale=0.5]{logc_2}
+		\label{fg:logc_se_2}
+\end{subfigure}
+	\caption{The \SE visualisation of logc in two viewing angles}
+\end{figure}
+
+So for a given final configuration logc takes a much smaller $Kp$ value 1 compared to the diffc controller which requires a 185, to achieve the same settling time (within 2\% of the final value) of 10s. 
+
+It should also be noted that the logc produces a much less curved solution in $\Re^3$ where as the diffc controller has a comparatively larger curvature. The path of the diffc controller overshoots the final position and comes back to the final configuration, which is a serious trouble in applications like welding and bolting.
+
+The logarithmic controller is arguably in some sense more "natural". 
+\section{Concluding question}
+Taking this discussion a step further ignoring the internal actuation, dynamics, structure of the hand, I ask the following question,
+\begin{center}
+	{\bf Our eyes cannot perceive \SE but can our brains do?}\\
+	Or does it do even better?
+\end{center}
+\section{Miscellaneous}
+The scope of the current work is as below,
+\begin{enumerate}
+	\item There is yet another way to describe the error. That is by splitting the \SO and $\Re^3$ parts of the dual quaternion and follow geodesics in each of these space. This approach is called the Double Geodesic Control, which we have not described here.
+	\item We have limited ourselves here to a very small subset of the problem. Firstly we deal only with regulation and secondly we are using only a P controller. One could use PD as well, as shown in \cite{bullo1995proportional}.
+	\item There is no sense of optimality in the formulation, i.e. we do not extremise any objective here.
+	\item Both the controllers behave abruptly as the gain is increased, but the from the error plots and animations, we see that logc closes the gap in Cartesian space and then \SO whereas diffc quickly reaches the orientation and then covers the gap in Cartesian space.
+\end{enumerate}
+% Bibliography files
+\bibliographystyle{ieeetr}
+\bibliography{stewart}
+%%%
+\appendix
+\section{Modules}
+The following functions are written and used for the completion of the above work.
+\subsection{Quaternions}
+\begin{enumerate}
+	\item quat: Generates a unit quaternion
+	\item qmult: Quaternion multiplication
+	\item cquat: Conjugate of a given quaternion
+	\item Hp: Generates the \Hp of a given quaternion
+	\item Hn: Generates the \Hn of a given quaternion
+	\item decq: Decomposes a quaternion into axis angle form
+\end{enumerate}
+\subsection{Dual Quaternions}
+\begin{enumerate}
+	\item unitdq: Generates a unit dual quaternion
+	\item cdualq: Gives the conjugate of a given dual quaternion
+	\item dqmult: Dual quaternion multiplication
+	\item dHp: Generates \Hp for the corresponding dual quaternion
+	\item dHp: Generates \Hn for the corresponding dual quaternion
+	\item logdq: Return the logarithm of a dual quaternion
+	\item explogdq: Given a logarithm of a dual quaternion it gives the exponent of it
+\end{enumerate}
+\subsection{Miscellaneous}
+\begin{enumerate}
+	\item R82dual: Converts an element from $\Re^8$ into a dual quaternion
+	\item R62dual: Converts an element from $\Re^6$ into a dual quaternion
+	\item frameplotter: Given an element in \se, the module plots the corresponding frame with respect to an origin
+\end{enumerate}
+\subsection{Initial Conditions}
+The non-singular initial and final poses of the manipulator are taken from \cite{ghosal2006robotics}\\
+
+All the modules and the codes can be found in \href{https://github.com/akhilsathuluri/Dual_Quaternion_Control}{my} github page
+
+\end{document}

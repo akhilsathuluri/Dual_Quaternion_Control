@@ -1,0 +1,133 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 11.2' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       158,          7]
+NotebookDataLength[      4810,        123]
+NotebookOptionsPosition[      4420,        109]
+NotebookOutlinePosition[      4766,        124]
+CellTagsIndexPosition[      4723,        121]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+Cell[BoxData[
+ RowBox[{"(*", 
+  RowBox[{
+  "Writing", " ", "a", "  ", "module", " ", "to", " ", "extract", " ", "list",
+    " ", "corresponding", " ", "to", " ", "a", " ", "particular", " ", "list",
+    " ", "of", " ", "elements", " ", "from", " ", "monopoly"}], 
+  "*)"}]], "Input",
+ CellChangeTimes->{{3.753600861364773*^9, 
+  3.7536008983248034`*^9}},ExpressionUUID->"ffeb3c18-73f9-421a-b5c9-\
+45e80f392371"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"minipoly", "[", 
+   RowBox[{"eq_", ",", " ", "var_", ",", " ", "minilist_"}], "]"}], ":=", 
+  RowBox[{"Module", "[", 
+   RowBox[{
+    RowBox[{"{", 
+     RowBox[{
+     "moneq", ",", " ", "i", ",", " ", "j", ",", " ", "moncoeff", ",", " ", 
+      "monlist", ",", " ", "retlist", ",", " ", "flag"}], "}"}], ",", 
+    "\[IndentingNewLine]", 
+    RowBox[{
+     RowBox[{"flag", "=", "0"}], ";", "\[IndentingNewLine]", 
+     RowBox[{"moneq", " ", "=", " ", 
+      RowBox[{"monopoly", "[", 
+       RowBox[{"eq", ",", " ", "var"}], "]"}]}], ";", "\[IndentingNewLine]", 
+     RowBox[{"retlist", " ", "=", " ", 
+      RowBox[{"{", "}"}]}], ";", "\[IndentingNewLine]", 
+     RowBox[{"moncoeff", " ", "=", " ", 
+      RowBox[{"moneq", "[", 
+       RowBox[{"[", "1", "]"}], "]"}]}], ";", "\[IndentingNewLine]", 
+     RowBox[{"monlist", " ", "=", " ", 
+      RowBox[{"moneq", "[", 
+       RowBox[{"[", "2", "]"}], "]"}]}], ";", "\[IndentingNewLine]", 
+     RowBox[{
+      RowBox[{"For", "[", 
+       RowBox[{
+        RowBox[{"i", "=", "1"}], ",", " ", 
+        RowBox[{"i", "\[LessEqual]", " ", 
+         RowBox[{
+          RowBox[{"Dimensions", "[", "minilist", "]"}], "[", 
+          RowBox[{"[", "1", "]"}], "]"}]}], ",", 
+        RowBox[{"i", "++"}], ",", "\[IndentingNewLine]", 
+        RowBox[{
+         RowBox[{"flag", "=", "0"}], ";", "\[IndentingNewLine]", 
+         RowBox[{"For", "[", 
+          RowBox[{
+           RowBox[{"j", "=", "1"}], ",", 
+           RowBox[{"j", "\[LessEqual]", " ", 
+            RowBox[{
+             RowBox[{"Dimensions", "[", "monlist", "]"}], "[", 
+             RowBox[{"[", "1", "]"}], "]"}]}], ",", 
+           RowBox[{"j", "++"}], ",", " ", "\[IndentingNewLine]", 
+           RowBox[{
+            RowBox[{"If", "[", 
+             RowBox[{
+              RowBox[{
+               RowBox[{"minilist", "[", 
+                RowBox[{"[", "i", "]"}], "]"}], "\[Equal]", 
+               RowBox[{"monlist", "[", 
+                RowBox[{"[", "j", "]"}], "]"}]}], ",", "\[IndentingNewLine]", 
+              RowBox[{
+               RowBox[{"AppendTo", "[", 
+                RowBox[{"retlist", ",", " ", 
+                 RowBox[{"moncoeff", "[", 
+                  RowBox[{"[", "j", "]"}], "]"}]}], "]"}], ";", 
+               "\[IndentingNewLine]", 
+               RowBox[{"Break", "[", "]"}], ";"}]}], "\[IndentingNewLine]", 
+             "]"}], "\[IndentingNewLine]", 
+            RowBox[{"If", "[", 
+             RowBox[{
+              RowBox[{"j", "\[Equal]", "0"}], ",", "\[IndentingNewLine]", 
+              RowBox[{
+               RowBox[{"AppendTo", "[", 
+                RowBox[{"retlist", ",", "0"}], "]"}], ";"}]}], 
+             "\[IndentingNewLine]", "]"}]}]}], "\[IndentingNewLine]", 
+          "]"}]}]}], "\[IndentingNewLine]", "]"}], "\[IndentingNewLine]", 
+      RowBox[{"Return", "[", "]"}]}], ";"}]}], "\[IndentingNewLine]", 
+   "]"}]}]], "Input",
+ CellChangeTimes->{{3.753600901118786*^9, 3.7536013259644976`*^9}, {
+  3.75360136879432*^9, 3.7536013757177725`*^9}, {3.753601411253851*^9, 
+  3.753601487010075*^9}, {3.753601536885337*^9, 3.7536016259147816`*^9}, {
+  3.7536016768884277`*^9, 3.75360167744353*^9}, {3.7536017518626957`*^9, 
+  3.7536017665486345`*^9}, {3.753601812671979*^9, 3.753601812803516*^9}, {
+  3.7536018552895174`*^9, 3.7536018580987535`*^9}, {3.7536019218520126`*^9, 
+  3.753601973241785*^9}},ExpressionUUID->"c8e17617-7163-4ec0-afe1-\
+b354a9a5c07a"]
+},
+WindowSize->{1350, 685},
+WindowMargins->{{0, Automatic}, {Automatic, 0}},
+FrontEndVersion->"11.2 for Microsoft Windows (64-bit) (September 10, 2017)",
+StyleDefinitions->"Default.nb"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[558, 20, 411, 9, 28, "Input",ExpressionUUID->"ffeb3c18-73f9-421a-b5c9-45e80f392371"],
+Cell[972, 31, 3444, 76, 390, "Input",ExpressionUUID->"c8e17617-7163-4ec0-afe1-b354a9a5c07a"]
+}
+]
+*)
+
+(* End of internal cache information *)
+

@@ -1,0 +1,25 @@
+\BOOKMARK [1][-]{section.1}{Introduction}{}% 1
+\BOOKMARK [2][-]{subsection.1.1}{Why use quaternions?}{section.1}% 2
+\BOOKMARK [3][-]{subsubsection.1.1.1}{Quaternions}{subsection.1.1}% 3
+\BOOKMARK [2][-]{subsection.1.2}{Why use dual numbers?}{section.1}% 4
+\BOOKMARK [3][-]{subsubsection.1.2.1}{Dual Numbers}{subsection.1.2}% 5
+\BOOKMARK [2][-]{subsection.1.3}{Why use dual quaternions?}{section.1}% 6
+\BOOKMARK [1][-]{section.2}{Dual Quaternion Control}{}% 7
+\BOOKMARK [2][-]{subsection.2.1}{Forward Kinematics}{section.2}% 8
+\BOOKMARK [2][-]{subsection.2.2}{Formulating Jacobian}{section.2}% 9
+\BOOKMARK [2][-]{subsection.2.3}{Control Law}{section.2}% 10
+\BOOKMARK [3][-]{subsubsection.2.3.1}{Error Dynamics}{subsection.2.3}% 11
+\BOOKMARK [1][-]{section.3}{Discussion}{}% 12
+\BOOKMARK [1][-]{section.4}{Utility}{}% 13
+\BOOKMARK [1][-]{section.5}{Error in error}{}% 14
+\BOOKMARK [2][-]{subsection.5.1}{What do we do?}{section.5}% 15
+\BOOKMARK [1][-]{section.6}{Error Dynamics}{}% 16
+\BOOKMARK [1][-]{section.7}{Discussion}{}% 17
+\BOOKMARK [1][-]{section.8}{Comparison of the two controllers}{}% 18
+\BOOKMARK [1][-]{section.9}{Concluding question}{}% 19
+\BOOKMARK [1][-]{section.10}{Miscellaneous}{}% 20
+\BOOKMARK [1][-]{appendix.A}{Modules}{}% 21
+\BOOKMARK [2][-]{subsection.A.1}{Quaternions}{appendix.A}% 22
+\BOOKMARK [2][-]{subsection.A.2}{Dual Quaternions}{appendix.A}% 23
+\BOOKMARK [2][-]{subsection.A.3}{Miscellaneous}{appendix.A}% 24
+\BOOKMARK [2][-]{subsection.A.4}{Initial Conditions}{appendix.A}% 25
